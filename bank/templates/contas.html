@@ -1,0 +1,47 @@
+{% extends "basic.html" %}
+
+{% block title %}
+Contas
+{% endblock %}
+
+{% block body %}
+<table class="contas data">
+	<thead>
+		<th>Id</th>
+		<th>Conta</th>
+		<th>Saldo</th>
+	</thead>
+	<tbody>
+		{% for c in contas %}
+			<tr>
+				<th>{{ c.id }}</th>
+				<td>{{ c.nome }}</td>
+				<td class="{% if c.saldo < 0 %}negative{% endif %}">{{ c.saldo }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<table class="saldo data">
+	<tr>
+		<th>Credito</th>
+		<td class="{% if credito < 0 %}negative{%endif%}">{{ credito }}</td>
+		<th rowspan="4" class="right-operator">+</th>
+	</tr>
+	<tr>
+		<th>Dividas</th>
+		<td class="{% if dividas < 0 %}negative{%endif%}">{{ dividas }}</td>
+	</tr>
+	<tr>
+		<th>Sub Total</th>
+		<td class="sumup {% if subtotal < 0 %}negative{%endif%}">{{ subtotal }}</td>
+	</tr>
+	<tr>
+		<th>Poupanca</th>
+		<td class="{% if poupanca < 0 %}negative{%endif%}">{{ poupanca }}</td>
+	</tr>
+	<tr>
+		<th>Saldo</th>
+		<td class="sumup">{{ total }}</td>
+	</tr>
+</table>
+{% endblock %}

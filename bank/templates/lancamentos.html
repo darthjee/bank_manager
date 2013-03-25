@@ -1,0 +1,59 @@
+{% extends "basic.html" %}
+
+{% block title %}
+Conta - {{ conta.nome }}
+{% endblock %}
+
+{% block extra-js %}
+	<script>
+		context.conta = {{conta.id}};
+		context.ano = {{year}};
+		context.mes = {{month}};
+	</script>
+	<script src="/static/js/core/lancamentos.js"></script>
+{% endblock %}
+
+{% block body %}
+<div class="lancamentos">
+	<h1>{{ conta.bank.name }} - {{ conta.nome }}</h1>
+	<h3>{{start}} - {{end}}</h3>
+	<div class="filter">
+		<button class="navigator" navigation="-12">&lt;&lt;</button>
+		<button class="navigator" navigation="-1">&lt;</button>
+		<input type="text" value="{{year}}" size="4" class="ano"/>
+		<select class="mes">
+			{% for m in months %}
+				<option value="{{m.id}}" {% if m.id == month %}selected="selected"{% endif %}>{{m.name}}</option>
+			{% endfor %}
+		</select>
+		<button class="navigator" navigation="1">&gt;</button>
+		<button class="navigator" navigation="12">&gt;&gt;</button>
+	</div>
+	<table class="lancamentos data">
+		<thead>
+			<th>Id</th>
+			<th>Transacao</th>
+			<th>Terceiro</th>
+			<th>data</th>
+			<th>Saldo Anterior</th>
+			<th>Valor</th>
+			<th>Saldo</th>
+		</thead>
+		<tbody>
+			{% for l in lancamentos %}
+				<tr class="{% if l.fixed %}fixed{% endif %} {% if l.isSaldo %}saldo{% endif %} {% if l.transacao.confirmed %}confirmed{%else%}not-confirmed{% endif %} {% cycle 'odd' '' %}" transId="{{ l.transacao.id }}">
+					<th>{{ l.id }}</th>
+					<th>{{ l.transacao.id }}</th>
+					<td>{{ l.thirdName }}</td>
+					<td>{{ l.data }}</td>
+					<td class="{% if l.saldoAnt < 0 %}negative{% endif %}">{{ l.saldoAnt }}</td>
+					<td class="{% if l.valor < 0 %}negative{% endif %}">{{ l.valor }}</td>
+					<td class="{% if l.saldo < 0 %}negative{% endif %}">{{ l.saldo }}</td>
+					<td class="actions"><span class="confirmar">Confirmar</span></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+{% endblock %}

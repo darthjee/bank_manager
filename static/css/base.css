@@ -1,0 +1,62 @@
+.fixed{
+	color:#0d0;
+}
+.confirmed
+{
+	color:#00d;
+}
+.not-confirmed
+{
+	color:#a51;
+}
+.negative{
+	color:#f00;
+}
+table.data
+{
+	border-spacing: 0px;
+}
+table.data tr.odd
+{
+	background:#eee;
+}
+table.data tr td,
+table.data tr th
+{
+	padding:2px 10px;
+	text-align:center;
+	border-spacing: 0px;
+}
+table.data tr td.right-operator,
+table.data tr th.right-operator
+{
+	border-left:1px solid black;
+}
+
+table.data tr.sumup td,
+table.data tr.sumup th,
+table.data tr td.sumup,
+table.data tr th.sumup
+{
+	border-top:1px solid black;
+}
+
+table.data tr.sumup td,
+table.data tr.sumup th
+{
+	font-weight:bold;
+}
+.lancamentos h1
+{
+	margin:2px 0px;
+}
+.lancamentos h3
+{
+	color:#666;
+	margin:2px 0px;
+}
+table.lancamentos.data tr.saldo td,
+table.lancamentos.data tr.saldo th
+{
+	padding-bottom:50px;
+}
